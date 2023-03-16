@@ -57,7 +57,7 @@ class unknownEvaluator:
         Takes known cards pre-flop (player's hand) in integer form, determining
         percentile/number of players better than at a given table.
 
-        Rankings: Pair (>6) > Draw s (>8) > A s > Pair > Draw o (>8) > A o >  Draw s  > Any s
+        Rankings: Pair (>6) > Suited (>8) > A s > Pair > Draw o (>8) > A o >  Draw s  > Any s
                     [8]          [28]       [4]    [5]      [28]       [4]    [18]      [28]
 
                 > Draw o > Any o
@@ -219,18 +219,3 @@ class unknownEvaluator:
                     print("Player {} is the winner with a {}\n".format(winners[0] + 1, hand_result))
                 else:
                     print("Players {} tied for the win with a {}\n".format([x + 1 for x in winners], hand_result))
-
-
-class PLOEvaluator(Evaluator):
-    HAND_LENGTH = 4
-
-    def evaluate(self, hand: list[int], board: list[int]) -> int:
-        minimum = LookupTable.MAX_HIGH_CARD
-
-        for hand_combo in itertools.combinations(hand, 2):
-            for board_combo in itertools.combinations(board, 3):
-                score = Evaluator._five(self, list(board_combo) + list(hand_combo))
-                if score < minimum:
-                    minimum = score
-
-        return minimum
