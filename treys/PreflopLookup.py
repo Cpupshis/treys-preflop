@@ -45,10 +45,10 @@ class LookupTable:
         self.suited_lookup: dict[int,int] = {}
         self.offsuit_lookup: dict[int,int] = {}
 
-        # self.pairs()
-        # self.highCards()
-        # self.draws()
-        # self.midLow()
+        self.pairs()
+        self.draws()
+        self.midLow()
+        self.highCards()
 
     def pairs(self) -> None:
 
